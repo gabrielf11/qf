@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Formula</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
+
+<body>
+    <main class="container">
+        <h1 style="padding-top: 20px;" id="title">Quadratic Formula</h1>
+        <form onsubmit="math()">
+            <input type="number" step="any" id="a" placeholder="a value" required>
+            <small style="display: none" id="a-invalid">a cannot equal 0</small>
+            <input type="number" step="any" id="b" placeholder="b value" required>
+            <input type="number" step="any" id="c" placeholder="c value" required>
+            <input type="submit" value="Calculate">
+        </form>
+        <div id="answer" style="display: none">
+            <h2>Answer</h2>
+            <p id="x">if you can see this text then something went wrong. sorry...?</p>
+        </div>
+    </main>
+
+    <!--All JS below-->
+    <script>
+        function math() {
+            // Stop the stupid thing from reloading the page and ruining EVERYTHING (thanks stack overflow post from like 12 years ago)
+            event.preventDefault()
+
+            // Pull values from form
+            let a = document.getElementById("a").value
+            let b = document.getElementById("b").value
+            let c = document.getElementById("c").value
+
+            // Reset in case script is run multiple times
+            document.getElementById("answer").style.display = "none"
+            document.getElementById("a").removeAttribute("aria-invalid")
+            document.getElementById("a-invalid").style.display = "none"
+            document.getElementById("title").innerHTML = "Quadratic Formula"
+
+            // Check if a = 0
+            if (a == 0) {
+                document.getElementById("a").ariaInvalid = true
+                document.getElementById("a-invalid").style.display = "block"
+                document.getElementById("title").innerHTML = '<b style="color: Red"><i>QUADRATIC</i></b> Formula (not linear)'
+                return // End function
+            }
+
+            // Calculate b^2 - 4ac
+            let presqrt = b ** 2 - (4 * a * c)
+
+            // Check if it's zero
+            if (presqrt < 0) {
+                // Print no solution
+                document.getElementById("answer").style.display = "block"
+                document.getElementById("answer").scrollIntoView()
+                document.getElementById("x").innerHTML = "<b>No real solution</b>" + '<br> Discriminant = ' + presqrt.toLocaleString()
+            } else {
+                // Finish calculating
+                sqrt = Math.sqrt(presqrt)
+                x1 = (-b + sqrt) / (2 * a)
+                x2 = (-b - sqrt) / (2 * a)
+
+                // Check if they're the same, then print answer
+                if (x1 == x2) {
+                    document.getElementById("answer").style.display = "block"
+                    document.getElementById("answer").scrollIntoView()
+                    document.getElementById("x").innerHTML = '<b> x = ' + x1.toLocaleString() + '</b> <br> Discriminant = ' + presqrt.toLocaleString()
+                } else {
+                    document.getElementById("answer").style.display = "block"
+                    document.getElementById("answer").scrollIntoView()
+                    document.getElementById("x").innerHTML = '<b> x = ' + x1.toLocaleString() + '<br> x = ' + x2.toLocaleString() + '</b> <br> Discriminant = ' + presqrt.toLocaleString()
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>
