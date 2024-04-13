@@ -12,9 +12,9 @@ function math() {
   const answerText = document.getElementById("answer-text");
 
   // Pull values from form
-  let a = aInput.value;
-  let b = bInput.value;
-  let c = cInput.value;
+  let a = parseFloat(aInput.value);
+  let b = parseFloat(bInput.value);
+  let c = parseFloat(cInput.value);
 
   // Reset in case script is run multiple times
   answer.style.display = "none";
@@ -33,6 +33,10 @@ function math() {
 
   // Calculate b^2 - 4ac
   let presqrt = b ** 2 - 4 * a * c;
+  // Calculate vertex
+  let vertx = -b / (2 * a);
+  let verty = (a * vertx**2) + (b * vertx) + c
+  let vertex = `(${vertx}, ${verty})`;
 
   // Check if it's zero
   if (presqrt < 0) {
@@ -45,10 +49,6 @@ function math() {
     sqrt = Math.sqrt(presqrt);
     x1 = (-b + sqrt) / (2 * a);
     x2 = (-b - sqrt) / (2 * a);
-    // Calculate vertex
-    vertx = -b / (2 * a);
-    verty = a * vertx ** 2 + b * vertx + c;
-    vertex = `(${vertx}, ${verty})`;
 
     // Check if they're the same, then print answer
     if (x1 == x2) {
