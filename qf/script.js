@@ -67,8 +67,8 @@ function math() {
   if (presqrt < 0) {
     // Print no solution
     answer.style.display = "block";
-    answer.scrollIntoView();
     answerText.innerHTML = `<b>No real solution</b> <br> Discriminant = ${presqrt.toLocaleString()} <br> Vertex = ${vertex}`;
+    answer.scrollIntoView({ behavior: "smooth" });
   } else {
     // Finish calculating
     sqrt = Math.sqrt(presqrt);
@@ -78,12 +78,12 @@ function math() {
     // Check if they're the same, then print answer
     if (x1 == x2) {
       answer.style.display = "block";
-      answer.scrollIntoView();
       answerText.innerHTML = `<b>x = ${x1.toLocaleString()}</b> <br> Discriminant = ${presqrt.toLocaleString()} <br> Vertex = ${vertex}`;
+      answer.scrollIntoView({ behavior: "smooth" });
     } else {
       answer.style.display = "block";
-      answer.scrollIntoView();
       answerText.innerHTML = `<b>x = ${x1.toLocaleString()} <br> x = ${x2.toLocaleString()}</b> <br> Discriminant = ${presqrt.toLocaleString()} <br> Vertex = ${vertex}`;
+      answer.scrollIntoView({ behavior: "smooth" });
     }
   }
 }
