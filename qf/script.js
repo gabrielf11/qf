@@ -1,26 +1,34 @@
+// Set HTML elements to variables
+const title = document.getElementById("title");
+const aInput = document.getElementById("a");
+const aInputText = document.getElementById("a-invalid");
+const bInput = document.getElementById("b");
+const cInput = document.getElementById("c");
+const answer = document.getElementById("answer");
+const answerText = document.getElementById("answer-text");
+const table = document.getElementById("table");
+
+// Declare values
+let a;
+let b;
+let c;
+
+// Function that runs when form is submitted and updates/solves all values
 function math() {
   // Stop the stupid thing from reloading the page and ruining EVERYTHING (thanks stack overflow post from like 12 years ago)
   event.preventDefault();
 
-  // Set HTML elements to variables
-  const title = document.getElementById("title");
-  const aInput = document.getElementById("a");
-  const aInputText = document.getElementById("a-invalid");
-  const bInput = document.getElementById("b");
-  const cInput = document.getElementById("c");
-  const answer = document.getElementById("answer");
-  const answerText = document.getElementById("answer-text");
-
   // Pull values from form
-  let a = parseFloat(aInput.value);
-  let b = parseFloat(bInput.value);
-  let c = parseFloat(cInput.value);
+  a = parseFloat(aInput.value);
+  b = parseFloat(bInput.value);
+  c = parseFloat(cInput.value);
 
   // Reset in case script is run multiple times
-  answer.style.display = "none";
+  title.innerHTML = "Quadratic Formula";
   aInput.removeAttribute("aria-invalid");
   aInputText.style.display = "none";
-  title.innerHTML = "Quadratic Formula";
+  answer.style.display = "none";
+  table.innerHTML = "";
 
   // Check if a = 0
   if (a == 0) {
@@ -35,8 +43,25 @@ function math() {
   let presqrt = b ** 2 - 4 * a * c;
   // Calculate vertex
   let vertx = -b / (2 * a);
-  let verty = (a * vertx**2) + (b * vertx) + c
+  let verty = f(vertx);
   let vertex = `(${vertx}, ${verty})`;
+  // Set values for table
+  let xColumn = [vertx - 2, vertx - 1, vertx, vertx + 1, vertx + 2];
+  let yColumn = [
+    f(xColumn[0]),
+    f(xColumn[1]),
+    f(xColumn[2]),
+    f(xColumn[3]),
+    f(xColumn[4]),
+  ];
+  for (i = 0; i < 5; i++) {
+    table.innerHTML += `
+    <tr>
+      <th scope="row">${xColumn[i]}</th>
+      <td>${yColumn[i]}</td>
+    </tr>
+    `;
+  }
 
   // Check if it's zero
   if (presqrt < 0) {
@@ -62,3 +87,17 @@ function math() {
     }
   }
 }
+
+// Function that quickly finds f(x) = ax^2+bx+c
+function f(x) {
+  return a * x ** 2 + b * x + c;
+}
+
+// this is useless for now...
+// function steps() {
+//   let params = new URLSearchParams()
+//   params.append("a", a)
+//   params.append("b", b)
+//   params.append("c", c)
+//   console.log(`${window.location.hostname}/steps/index.html?${params}`)
+// }
