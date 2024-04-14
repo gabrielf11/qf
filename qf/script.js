@@ -57,8 +57,8 @@ function math() {
   for (i = 0; i < 5; i++) {
     table.innerHTML += `
     <tr>
-      <th scope="row">${xColumn[i]}</th>
-      <td>${yColumn[i]}</td>
+      <th scope="row">${xColumn[i].toLocaleString()}</th>
+      <td>${yColumn[i].toLocaleString()}</td>
     </tr>
     `;
   }
@@ -88,7 +88,7 @@ function math() {
   }
 }
 
-// Function that quickly finds f(x) = ax^2+bx+c
+// Function that finds x in ax^2+bx+c
 function f(x) {
   return a * x ** 2 + b * x + c;
 }
