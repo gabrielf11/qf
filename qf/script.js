@@ -19,9 +19,9 @@ function math() {
   event.preventDefault();
 
   // Pull values from form
-  a = parseFloat(aInput.value);
-  b = parseFloat(bInput.value);
-  c = parseFloat(cInput.value);
+  a = Number(aInput.value);
+  b = Number(bInput.value);
+  c = Number(cInput.value);
 
   // Reset in case script is run multiple times
   title.innerHTML = "Quadratic Formula";
@@ -31,7 +31,7 @@ function math() {
   table.innerHTML = "";
 
   // Check if a = 0
-  if (a == 0) {
+  if (a === 0) {
     aInput.ariaInvalid = true;
     title.style.display = "block";
     title.innerHTML =
@@ -76,7 +76,7 @@ function math() {
     x2 = (-b - sqrt) / (2 * a);
 
     // Check if they're the same, then print answer
-    if (x1 == x2) {
+    if (x1 === x2) {
       answer.style.display = "block";
       answerText.innerHTML = `<b>x = ${x1.toLocaleString()}</b> <br> Discriminant = ${presqrt.toLocaleString()} <br> Vertex = ${vertex}`;
       answer.scrollIntoView({ behavior: "smooth" });
@@ -92,12 +92,3 @@ function math() {
 function f(x) {
   return a * x ** 2 + b * x + c;
 }
-
-// this is useless for now...
-// function steps() {
-//   let params = new URLSearchParams()
-//   params.append("a", a)
-//   params.append("b", b)
-//   params.append("c", c)
-//   console.log(`${window.location.hostname}/steps/index.html?${params}`)
-// }
