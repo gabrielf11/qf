@@ -45,15 +45,9 @@ function math() {
   let vertx = -b / (2 * a);
   let verty = f(vertx);
   let vertex = `(${vertx}, ${verty})`;
-  // Set values for table
+  // Calculate table values
   let xColumn = [vertx - 2, vertx - 1, vertx, vertx + 1, vertx + 2];
-  let yColumn = [
-    f(xColumn[0]),
-    f(xColumn[1]),
-    f(xColumn[2]),
-    f(xColumn[3]),
-    f(xColumn[4]),
-  ];
+  let yColumn = xColumn.map((x) => f(x));
   for (i = 0; i < 5; i++) {
     table.innerHTML += `
     <tr>
