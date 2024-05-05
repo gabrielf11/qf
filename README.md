@@ -1,2 +1,2 @@
-# stuff
-just some random unrelated projects and stuff.
+# qf
+a simple and incomplete quadratic formula solver
