@@ -27,7 +27,7 @@ function math() {
   // Check if a = 0
   if (a === 0) {
     aInput.ariaInvalid = true;
-    title.style.display = "block";
+    aInputText.style.display = "block";
     title.innerHTML =
       '<b style="color: Red"><i>QUADRATIC</i></b> Formula (not linear)';
     return; // End function
